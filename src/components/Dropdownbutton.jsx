@@ -29,10 +29,10 @@ const Dropdownbutton = (props) => {
    
     
   return (
-    <div ref={element} className='my-auto'>
+    <div ref={element} className='my-auto w-full'>
     {
         !categoryBtnIsOpen ?  <>
-        <button  className='relative bg-transparent border-2 border-red-500 rounded-md my-auto ml-1 flex active:border-green-500'>{props.name}
+        <button className='relative bg-transparent border-2 border-red-500 rounded-md my-auto ml-1 flex active:border-green-500'>{props.name}
         {categoryBtnIsOpen ?   <AiOutlineCaretUp className='my-auto'/> : <AiOutlineCaretDown className='my-auto'/> }
     </button>
     <ul className='hidden  flex-col absolute mx-auto p-2 '>
