@@ -1,24 +1,41 @@
 import React from 'react' 
-import { useState } from 'react';
 import {AiOutlineCaretUp,AiOutlineCaretDown} from 'react-icons/ai'
+import { useState,useEffect,useRef } from 'react';
+
 
 
 const Dropdownbutton = (props) => {
-const [categoryBtnIsOpen,setCategoryBtnIsOpen] = useState(false);
-const openDropdownBtn =()=>{
-    setCategoryBtnIsOpen(!categoryBtnIsOpen)
-}
+    const [categoryBtnIsOpen,setCategoryBtnIsOpen] = useState(false);
+
+    const openDropdownBtn =()=>{
+        setCategoryBtnIsOpen(!categoryBtnIsOpen)
+    }
+    const closeDropDown=()=>{
+        setCategoryBtnIsOpen(categoryBtnIsOpen)
+    }
+
+    const element = useRef()
+
+    const close = (e)=>{
+        !element.current.contains(e.target) ? 
+            closeDropDown()
+        :
+            openDropdownBtn()
+    }
+
+    useEffect(()=>{
+        document.addEventListener("click",close,true)
+    },[])
+   
+    
   return (
-    <div onClick={openDropdownBtn} className='my-auto'>
+    <div ref={element} className='my-auto'>
     {
         !categoryBtnIsOpen ?  <>
-        <button onClick={openDropdownBtn} className='relative bg-transparent border-2 border-red-500 rounded-md my-auto ml-1 flex active:border-green-500'>{props.name}
+        <button  className='relative bg-transparent border-2 border-red-500 rounded-md my-auto ml-1 flex active:border-green-500'>{props.name}
         {categoryBtnIsOpen ?   <AiOutlineCaretUp className='my-auto'/> : <AiOutlineCaretDown className='my-auto'/> }
     </button>
     <ul className='hidden  flex-col absolute mx-auto p-2 '>
-        <li>whiskey</li>
-        <li>whiskey</li>
-        <li>whiskey</li>
     </ul>
     </>
     :

@@ -1,15 +1,33 @@
 import React from 'react'
 import {AiOutlineUser} from 'react-icons/ai'
-import { useState } from 'react';
+import { useState,useEffect,useRef } from 'react';
 
 
 const Userbtn = () => {
     const [categoryBtnIsOpen,setCategoryBtnIsOpen] = useState(false);
+
     const openDropdownBtn =()=>{
-    setCategoryBtnIsOpen(!categoryBtnIsOpen)
-}
+        setCategoryBtnIsOpen(!categoryBtnIsOpen)
+    }
+    const closeDropDown=()=>{
+        setCategoryBtnIsOpen(categoryBtnIsOpen)
+    }
+
+    const element = useRef()
+
+    useEffect(()=>{
+        document.addEventListener("click",handleclick,true)
+    },[])
+    const handleclick = (e)=>{
+        !element.current.contains(e.target) ? 
+            closeDropDown()
+        :
+        openDropdownBtn()
+    }
+    
+ 
   return (
-    <div onClick={openDropdownBtn}>{categoryBtnIsOpen ? <AiOutlineUser className='mr-2 hover:cursor-pointer  hover:text-white text-white' size={25} />:<AiOutlineUser className='mr-2 hover:cursor-pointer hover:text-white' size={25} />}
+    <div ref={element}>{categoryBtnIsOpen ? <AiOutlineUser className='mr-2 hover:cursor-pointer  hover:text-white text-white' size={25} />:<AiOutlineUser className='mr-2 hover:cursor-pointer hover:text-white' size={25} />}
       {
         !categoryBtnIsOpen ?  
     <ul className='hidden  flex-col absolute mx-auto p-2 '>
