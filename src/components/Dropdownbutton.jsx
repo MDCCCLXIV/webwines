@@ -32,7 +32,7 @@ const Dropdownbutton = (props) => {
     <div ref={element} className='my-auto w-full'>
     {
         !categoryBtnIsOpen ?  <>
-        <button className='relative bg-transparent border-2 border-red-500 rounded-md my-auto ml-1 flex active:border-green-500'>{props.name}
+        <button className='relative bg-transparent border-2 border-red-500 rounded-md my-auto ml-1 flex active:border-green-500 text-sm'>{props.name}
         {categoryBtnIsOpen ?   <AiOutlineCaretUp className='my-auto'/> : <AiOutlineCaretDown className='my-auto'/> }
     </button>
     <ul className='hidden  flex-col absolute mx-auto p-2 '>
@@ -40,7 +40,7 @@ const Dropdownbutton = (props) => {
     </>
     :
     <>
-    <button onClick={openDropdownBtn} className='relative bg-transparent border-2 border-green-500 rounded-md my-auto ml-1 flex'>{props.name}
+    <button onClick={openDropdownBtn} className='relative bg-transparent border-2 border-green-500 rounded-md my-auto ml-1 flex text-sm'>{props.name}
     {categoryBtnIsOpen ?   <AiOutlineCaretUp className='my-auto'/> : <AiOutlineCaretDown className='my-auto'/> }
 </button>
     <ul className='flex flex-col absolute mx-auto p-2 mt-2 w-[150px] bg-slate-50 shadow-md rounded'>

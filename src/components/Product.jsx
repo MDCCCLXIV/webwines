@@ -7,15 +7,19 @@ const Product = ({products}) => {
          {products.map(({name,price,alcontent,image}) =>{
             return(
    
-          <div className='flex flex-col  p-2 bg-slate-50 shadow-md rounded m-1 align-middle'>
-            <div className='w-full h-[80%] flex justify-center'>
-                <img src={image} alt=''/></div>
-            <div className='flex w-full justify-evenly'>
+          <div className='flex flex-col  p-2 bg-slate-50 shadow-md rounded m-1 align-middle hover:shadow-lg'>
+            <div className='w-full h-[70%] flex justify-center'>
+                <img className=' object-fit w-full h-[200px]' src={image} alt=''/></div>
+            <div className='flex w-full justify-between p-2 text-sm'>
                 <span>{name}</span>
-                <span>{price}</span>
-                <span>{alcontent}</span>
+                <span>{alcontent}%</span>
             </div>
-            <div className='flex w-100 justify-center'>add to cart</div>
+            <div className='flex w-full justify-evenly text-sm'>
+            <span>KES {price}</span>
+            </div>
+            <div className='flex w-100 justify-center'>
+                <button className='hover:bg-orange-300 p-1 my-auto hover:text-white rounded-md text-sm'>add to cart</button>
+            </div>
             </div>
 
           
