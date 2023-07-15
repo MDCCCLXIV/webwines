@@ -10,7 +10,7 @@ const Product = ({products}) => {
           <div className='flex flex-col  p-2 bg-slate-50 shadow-md rounded m-1 align-middle'>
             <div className='w-full h-[80%] flex justify-center'>
                 <img src={image} alt=''/></div>
-            <div className='flex w-full justify-center'>
+            <div className='flex w-full justify-evenly'>
                 <span>{name}</span>
                 <span>{price}</span>
                 <span>{alcontent}</span>
