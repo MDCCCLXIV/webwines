@@ -8,14 +8,14 @@ const Product = ({products}) => {
             return(
    
           <div className='flex flex-col  p-2 bg-slate-50 shadow-md rounded m-1 align-middle'>
-            <div className='w-full h-[80%] flex'>
+            <div className='w-full h-[80%] flex justify-center'>
                 <img src={image} alt=''/></div>
-            <div>
+            <div className='flex w-full justify-center'>
                 <span>{name}</span>
                 <span>{price}</span>
                 <span>{alcontent}</span>
             </div>
-            <div>add to cart</div>
+            <div className='flex w-100 justify-center'>add to cart</div>
             </div>
 
           
