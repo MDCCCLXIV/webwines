@@ -1,101 +1,56 @@
-import React from 'react'
-import { useState } from 'react'
+import React, { useState, useEffect } from 'react';
 import Product from './Product';
-import Pagination from './Pagination'
-
+import Pagination from './Pagination';
 
 const Productsgrid = () => {
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    fetch("https://sipshop.herokuapp.com/products-list/")
+      .then((response) => response.json())
+      .then((data) => {
+        setProducts(data);
+        console.log(data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }, []);
 
-    const product = [{name:"John Walker",
-                      price:1200,
-                    image:"jd.jpeg",
-                    alcontent:40}
-                    ,{name:"best",
-                      price:1200,
-                    image:"best.webp",
-                    alcontent:40}
-                    ,{name:"Black Lable",
-                      price:1200,
-                    image:"bl.jpeg",
-                    alcontent:40}
-                    ,{name:"John Walker",
-                      price:1200,
-                    image:"jd.jpeg",
-                    alcontent:40}
-                    ,{name:"Jack Daniels",
-                      price:1200,
-                    image:"jd.jpeg",
-                    alcontent:40}
-                    ,{name:"John Walker",
-                      price:1200,
-                    image:"jd.jpeg",
-                    alcontent:40}
-                    ,{name:"John Walker",
-                      price:1200,
-                    image:"kibao.jpeg",
-                    alcontent:40}
-                    ,{name:"John Walker",
-                      price:1200,
-                    image:"jd.jpeg",
-                    alcontent:40}
-                    ,{name:"John Walker",
-                      price:1200,
-                    image:"aperol.jpeg",
-                    alcontent:40}
-                    ,{name:"John Walker",
-                      price:1200,
-                    image:"jd.jpeg",
-                    alcontent:40}
-                    ,{name:"John Walker",
-                      price:1200,
-                    image:"jd.jpeg",
-                    alcontent:40}
-                    ,{name:"John Walker",
-                      price:1200,
-                    image:"jd.jpeg",
-                    alcontent:40}
-                    ,{name:"John Walker",
-                      price:1200,
-                    image:"jd.jpeg",
-                    alcontent:40}
-                    ,{name:"John Walker",
-                      price:1200,
-                    image:"jd.jpeg",
-                    alcontent:40}
-                    ,{name:"John Walker",
-                      price:1200,
-                    image:"jd.jpeg",
-                    alcontent:40}
-                    ,{name:"Hennessy",
-                      price:1200,
-                    image:"hennessy.jpeg",
-                    alcontent:40}
-                    ,{name:"Kibao",
-                      price:1200,
-                    image:"kibao.jpeg",
-                    alcontent:40}
-                    
-                ]
+  const [currentPage, setCurrentPage] = useState(1);
+  const [productPerPage] = useState(15);
 
+  // get current products
+  const indexOfLastProduct = currentPage * productPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productPerPage;
+  const currentProducts = products.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
 
-    // const [products,setProducts]=useState([]) from the database or the api
-    const [currentPage,setCurrentPage]=useState(1);
-    const [productPerPage]=useState(15)
+  const setPage = (pageNumbers) => {
+    setCurrentPage(pageNumbers);
+  };
 
-    // get current products
-    const indexofLastProduct = currentPage * productPerPage;
-    const indexofFirstProduct = indexofLastProduct - productPerPage;
-    const curentProducts = product.slice(indexofFirstProduct,indexofLastProduct)
-    const setPage = (pageNumbers)=>{
-        setCurrentPage(pageNumbers)
-    }
   return (
-    <div className='w-full  flex flex-col'>
-        <div className='flex w-full h-full '><Product products={curentProducts} name={curentProducts.name} price={curentProducts.price} alcontent={curentProducts.alcontent} image={curentProducts.image} /></div>
-        <div className='w-full flex mx-auto container'><Pagination productPerPage={productPerPage} totalProducts={product.length} setPage={setPage} /></div>
-
+    <div className="w-full  flex flex-col">
+      <div className="flex w-full h-full">
+        <Product
+          products={currentProducts}
+          product_name={currentProducts.product_name}
+          price={currentProducts.price}
+          alcohol_content={currentProducts.alcohol_content}
+          image={currentProducts.image}
+        />
+      </div>
+      <div className="w-full flex mx-auto container">
+        <Pagination
+          productPerPage={productPerPage}
+          totalProducts={products.length}
+          setPage={setPage}
+        />
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Productsgrid
+export default Productsgrid;
